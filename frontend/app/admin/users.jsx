@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { env } from 'next-runtime-env';
 
 export default function Clerks() {
   const [clerks, setClerks] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // <-- search input state
   const [currentPage, setCurrentPage] = useState(1); // <-- pagination state
+const apiUrl = env('NEXT_PUBLIC_API_URL');
 
   useEffect(() => {
     fetchClerks();
@@ -13,14 +15,14 @@ export default function Clerks() {
 
   const fetchClerks = async () => {
     const res = await axios.get(
-      "https://shreefitness-backend.onrender.com/admin/clerk"
+      apiUrl+"/admin/clerk"
     );
     setClerks(res.data);
   };
 
   const deleteClerk = async (id) => {
     await axios.delete(
-      `https://shreefitness-backend.onrender.com/admin/clerk/${id}`
+      apiUrl+`/admin/clerk/${id}`
     );
     fetchClerks();
   };

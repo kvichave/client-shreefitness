@@ -66,7 +66,7 @@ const GymReceipt = () => {
     </div>
   );
 };
-const html = ReactDOMServer.renderToStaticMarkup(<GymReceipt />);
-console.log(html);
+// const html = ReactDhttps://127.4.32.5:5000 OMServer.renderToStaticMarkup(<GymReceipt />);
+// console.log(html);
 
 export default GymReceipt;

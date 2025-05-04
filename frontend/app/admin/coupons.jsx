@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { env } from 'next-runtime-env';
 
 export default function Coupons() {
   const [coupons, setCoupons] = useState([]);
@@ -11,6 +12,8 @@ export default function Coupons() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
+  const apiUrl = env('NEXT_PUBLIC_API_URL');
+
 
   useEffect(() => {
     fetchCoupons();
@@ -19,14 +22,14 @@ export default function Coupons() {
 
   const fetchCoupons = async () => {
     const res = await axios.get(
-      "https://shreefitness-backend.onrender.com/admin/coupons"
+      apiUrl+"/admin/coupons"
     );
     setCoupons(res.data);
   };
 
   const fetchPlans = async () => {
     const res = await axios.get(
-      "https://shreefitness-backend.onrender.com/admin/plans"
+      apiUrl+"/admin/plans"
     );
     setAvailablePlans(res.data);
   };
@@ -34,7 +37,7 @@ export default function Coupons() {
   const addCoupon = async () => {
     if (!coupon || !value || plans.length === 0) return;
     await axios.post(
-      "https://shreefitness-backend.onrender.com/admin/coupons",
+      apiUrl+"/admin/coupons",
       {
         coupon,
         value,
@@ -49,7 +52,7 @@ export default function Coupons() {
 
   const deleteCoupon = async (id) => {
     await axios.delete(
-      `https://shreefitness-backend.onrender.com/admin/coupons/${id}`
+      apiUrl+`/admin/coupons/${id}`
     );
     fetchCoupons();
   };

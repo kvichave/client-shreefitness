@@ -6,7 +6,6 @@ from clerkWebhook import clerkdata
 from payments import payments
 from subscriptions import subscriptions
 from admin import admin
-import razorpay
 app = Flask(__name__)
 CORS(app, supports_credentials=True, origins="*")
 app.register_blueprint(clerkdata)
@@ -16,10 +15,8 @@ app.register_blueprint(admin)
 app.secret_key = "your_secret_key"  # Needed for session support
 
 import sqlite3
-client = razorpay.Client(auth=("rzp_test_0fJFxZHQ0pt557", "EciUxT9hH3EcW2vAIv7s1qkw"))
 
-import hmac
-import hashlib
+
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 

@@ -2,10 +2,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { env } from 'next-runtime-env';
 
 const PricingSection = () => {
   const [plans, setPlans] = useState([]);
   const router = useRouter();
+const apiUrl = env('NEXT_PUBLIC_API_URL');
+
 
   useEffect(() => {
     const axios = require("axios");
@@ -13,7 +16,7 @@ const PricingSection = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "https://shreefitness-backend.onrender.com/api/plans",
+      url: apiUrl+"/api/plans",
       headers: {},
     };
 

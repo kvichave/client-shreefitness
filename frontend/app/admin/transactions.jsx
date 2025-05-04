@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { env } from 'next-runtime-env';
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // Search input state
+const apiUrl = env('NEXT_PUBLIC_API_URL');
 
   useEffect(() => {
     fetchTransactions();
@@ -12,7 +14,7 @@ export default function Transactions() {
 
   const fetchTransactions = async () => {
     const res = await axios.get(
-      "https://shreefitness-backend.onrender.com/admin/transactions"
+      apiUrl+"/admin/transactions"
     );
     setTransactions(res.data);
   };

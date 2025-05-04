@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { env } from 'next-runtime-env';
 
 export default function Plans() {
   const [plans, setPlans] = useState([]);
   const [plan, setPlan] = useState({});
+  
+  const apiUrl = env('NEXT_PUBLIC_API_URL');
 
   useEffect(() => {
     fetchPlans();
@@ -11,7 +14,7 @@ export default function Plans() {
 
   const fetchPlans = async () => {
     const res = await fetch(
-      "https://shreefitness-backend.onrender.com/admin/plans"
+      apiUrl+"/admin/plans"
     );
     const data = await res.json();
     setPlans(data);
@@ -26,13 +29,13 @@ export default function Plans() {
     };
 
     if (plan.id) {
-      await fetch("https://shreefitness-backend.onrender.com/admin/plans", {
+      await fetch(apiUrl+"/admin/plans", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
     } else {
-      await fetch("https://shreefitness-backend.onrender.com/admin/plans", {
+      await fetch(apiUrl+"/admin/plans", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -43,7 +46,7 @@ export default function Plans() {
   };
 
   const deletePlan = async (id) => {
-    await fetch(`https://shreefitness-backend.onrender.com/admin/plans/${id}`, {
+    await fetch(apiUrl+`/admin/plans/${id}`, {
       method: "DELETE",
     });
     fetchPlans();

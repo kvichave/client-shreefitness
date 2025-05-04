@@ -2,14 +2,13 @@ from flask import Flask, session, request, jsonify,Blueprint
 from flask_cors import CORS
 import sqlite3
 import razorpay
-import hmac
-import hashlib
+
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import json
-
+import os
 payments = Blueprint('payments', __name__)
-client = razorpay.Client(auth=("rzp_test_0fJFxZHQ0pt557", "EciUxT9hH3EcW2vAIv7s1qkw"))
+client = razorpay.Client(auth=(os.getenv("RAZOR_KEY"), os.getenv("RAZOR_SECRET")))
 
 def get_db_connection():
     conn = sqlite3.connect('./userData.db')

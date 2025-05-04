@@ -1,4 +1,5 @@
 "use client";
+import { env } from 'next-runtime-env';
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -8,8 +9,9 @@ import { BsPersonFill } from "react-icons/bs";
 import { MdOutlineDiscount } from "react-icons/md";
 import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/nextjs";
 import { SignIn } from "@clerk/clerk-react";
+const apiUrl = env('NEXT_PUBLIC_API_URL');
 
-const API_BASE = "https://shreefitness-backend.onrender.com/api";
+const API_BASE = apiUrl+"/api";
 
 const Order = () => {
   const { id: planId } = useParams();

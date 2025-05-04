@@ -4,13 +4,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SignedIn, UserButton, SignedOut } from "@clerk/nextjs";
+import { env } from 'next-runtime-env';
 
 const Header = () => {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
+const apiUrl = env('NEXT_PUBLIC_API_URL');
+  console.log("api :   ",apiUrl)
+
+
   const fetchadmin = async () => {
     const res = await fetch(
-      "https://shreefitness-backend.onrender.com/api/admin/verify",
+      apiUrl+"/api/admin/verify",
       {
         method: "POST",
         headers: {

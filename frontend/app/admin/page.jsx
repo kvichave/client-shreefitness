@@ -6,14 +6,17 @@ import Coupons from "./coupons";
 import Clerks from "./users";
 import { m } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { env } from 'next-runtime-env';
 
 function Admin() {
   const router = useRouter();
   const [activeComponent, setActiveComponent] = useState("plans");
   const [isAdmin, setIsAdmin] = useState(false);
+  const apiUrl = env('NEXT_PUBLIC_API_URL');
+
   const fetchadmin = async () => {
     const res = await fetch(
-      "https://shreefitness-backend.onrender.com/api/admin/verify",
+      apiUrl+"/api/admin/verify",
       {
         method: "POST",
         headers: {

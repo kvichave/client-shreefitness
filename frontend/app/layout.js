@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SyncUserSession from "./syncusersession";
 import Header from "../components/Header";
+import { PublicEnvScript } from 'next-runtime-env';
+
 
 import {
   ClerkProvider,
@@ -32,6 +34,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <SyncUserSession />
+        <PublicEnvScript />
 
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased `}

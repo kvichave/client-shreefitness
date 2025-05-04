@@ -1,13 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { env } from 'next-runtime-env';
 
 function page() {
   const [activePlans, setActivePlans] = useState([]);
   const [plansHistory, setPlansHistory] = useState([]);
   const [plandetails, setPlanDetails] = useState([]);
+const apiUrl = env('NEXT_PUBLIC_API_URL');
+
   function downloadreceipt(id) {
     const receiptUrl =
-      "https://shreefitness-backend.onrender.com/download/receipt_" +
+      apiUrl+"/download/receipt_" +
       id +
       ".pdf"; // Replace with your actual URL
     const link = document.createElement("a");
@@ -20,7 +23,7 @@ function page() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://shreefitness-backend.onrender.com/api/get_user_details",
+        apiUrl+"/api/get_user_details",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
