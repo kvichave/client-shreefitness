@@ -71,10 +71,13 @@ def extractClerk(data):
     if len(data['data']['phone_numbers'])==0:
         clerkNumber="None"
     else:
-        clerkNumber=data['data']['phone_numbers'][0]['phone_number']
-    print("clerk Number :: ",clerkNumber)
+        clerkNumber="None" 
+
+    #     clerkNumber=data['data']['phone_numbers'][0]['phone_number']
+    # print("clerk Number :: ",clerkNumber) only on clerk upgradation
 
 
+    # clerkNumber="None"
 
     return (clerkId,clerkName,clerkEmail,clerkNumber,requestType)
 

@@ -73,7 +73,7 @@ const apiUrl = env('NEXT_PUBLIC_API_URL');
       <div>
         <SignedOut>
           <button
-            onClick={() => router.forward("/sign-in")}
+            onClick={() => router.push("/sign-in")}
             className="border border-white text-white px-4 py-2 rounded-xl mr-2"
           >
             Signup

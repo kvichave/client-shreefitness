@@ -106,7 +106,7 @@ def get_user_details():
         FROM plan_payments pp
         JOIN plans p ON pp.planid = p.id
         WHERE pp.userid = ?
-    ''', (user_id,))
+    ''', (user_id,)) 
     
     history = [dict(row) for row in cursor.fetchall()]
     conn.close()
@@ -147,8 +147,25 @@ def update_plan_status():
     return jsonify({'message': 'Expired plans deactivated successfully.'})
 
 
+@app.route("/api/getcontact",methods=['POST','GET'])
+def getContact():
+    phone=session['contact']
+    if phone == "None":
+        return jsonify({"FLAG":"NO"})
+    else:
+        return jsonify({"FLAG":"YES"})
+    
+@app.route("/api/savecontact",methods=['POST','GET'])
+def saveconta():
+    phone=request.json.get('phone')
+    address=request.json.get('address')
 
-
+    conn=get_db_connection()
+    conn.execute('UPDATE clerk SET phone = ?,address=?  WHERE id = ?', (phone,address,session['user_id']))
+    conn.commit()
+    conn.close()
+    print(phone,address)
+    return jsonify({"FLAG":"YES"})
 
 
 if __name__ == '__main__':

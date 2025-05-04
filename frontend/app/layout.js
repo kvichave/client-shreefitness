@@ -2,8 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SyncUserSession from "./syncusersession";
 import Header from "../components/Header";
-import { PublicEnvScript } from 'next-runtime-env';
-
+import { PublicEnvScript } from "next-runtime-env";
+import ContactForm from "./savedetails";
 
 import {
   ClerkProvider,
@@ -34,13 +34,15 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <SyncUserSession />
-        <PublicEnvScript />
+        <head>
+          <PublicEnvScript />
+        </head>
 
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         >
           <Header />
-
+          <ContactForm></ContactForm>
           {children}
           <Footer />
         </body>
